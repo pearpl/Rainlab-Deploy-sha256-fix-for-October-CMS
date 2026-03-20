@@ -112,7 +112,6 @@ bash /tmp/deploy-patch/fix.sh
 ```
 ├── fix.sh      # Patch script (bash)
 ├── LICENSE     # MIT license
-├── .gitignore
 └── README.md   # This file
 ```
 
