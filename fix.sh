@@ -1,6 +1,8 @@
 #!/bin/bash
 # ============================================
 # RainLab.Deploy OpenSSL SHA256 Patch
+# Version: 1.0.0
+# License: MIT
 # Fixes: "Could not contact beacon" on servers with OpenSSL 3.x
 # Usage: Run from the root of any October CMS project
 #   bash fix.sh
@@ -8,6 +10,8 @@
 # Author: Łukasz 'Alien' Kosma — Pear Interactive
 #         https://pear.pl | https://github.com/pearpl
 # ============================================
+
+VERSION="1.0.0"
 
 set -e
 
@@ -19,7 +23,9 @@ if [ ! -f "artisan" ] || [ ! -d "$DEPLOY_DIR" ]; then
     exit 1
 fi
 
-echo "🔧 Patching RainLab.Deploy (OpenSSL SHA256 fix)..."
+echo "🔧 RainLab.Deploy SHA256 Patch v${VERSION}"
+echo "   https://github.com/pearpl/Rainlab-Deploy-sha256-fix-for-October-CMS"
+echo ""
 
 # 1. Fix ServerKey.php — openssl_sign
 FILE1="$DEPLOY_DIR/models/ServerKey.php"

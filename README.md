@@ -1,6 +1,26 @@
 # RainLab.Deploy — OpenSSL SHA256 Patch
 
-> Fixes **"Could not contact beacon"** error on servers running OpenSSL 3.x
+[![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square)](https://github.com/pearpl/Rainlab-Deploy-sha256-fix-for-October-CMS/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![October CMS](https://img.shields.io/badge/October%20CMS-v4.1.x-orange?style=flat-square)](https://octobercms.com)
+[![RainLab.Deploy](https://img.shields.io/badge/RainLab.Deploy-v3.1.1-purple?style=flat-square)](https://octobercms.com/plugin/rainlab-deploy)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-☕-yellow?style=flat-square)](https://buycoffee.to/pearpl)
+
+> One-command fix for **"Could not contact beacon"** error on servers running OpenSSL 3.x
+
+---
+
+## Table of Contents
+
+- [Problem](#problem)
+- [What the patch does](#what-the-patch-does)
+- [Quick start](#quick-start)
+- [After patching](#after-patching)
+- [Compatibility](#compatibility)
+- [Notes](#notes)
+- [Author](#author)
+- [Support](#support)
+- [License](#license)
 
 ## Problem
 
@@ -45,16 +65,17 @@ Adds `OPENSSL_ALGO_SHA256` as an explicit signature algorithm in **3 places**:
 | `models/ServerKey.php` line 76 | `openssl_verify()` | Local signature verification |
 | `beacon/templates/app/bootstrap/beacon.stub` line ~264 | `openssl_verify()` | Signature verification on the remote server |
 
-## Usage
+## Quick start
 
-### Quick fix
+### Option A — Download and run
 
 ```bash
 cd /path/to/your-octobercms-project
+curl -sO https://raw.githubusercontent.com/pearpl/Rainlab-Deploy-sha256-fix-for-October-CMS/main/fix.sh
 bash fix.sh
 ```
 
-Or clone and run in one go:
+### Option B — Clone and run
 
 ```bash
 cd /path/to/your-octobercms-project
@@ -69,17 +90,29 @@ bash /tmp/deploy-patch/fix.sh
 3. Reports the status of each change
 4. Asks whether to delete itself — the script **self-destructs** after use if you confirm
 
-### After running the patch
+## After patching
 
 1. Go to **Backend → Settings → Deploy → Server**
 2. Click **"Download Beacon"** — this generates a new ZIP with the patched code
 3. Upload and extract the ZIP on your remote server (overwrite `index.php` and `bootstrap/`)
 4. Click **"Check Beacon"** — status should now show **"Ready"**
 
+## Compatibility
+
+| Component | Version |
+|-----------|---------|
+| RainLab.Deploy | v3.1.1 and earlier |
+| October CMS | v4.1.x (tested on v4.1.17) |
+| Laravel | 12.x |
+| PHP | 7.1+ |
+| OpenSSL | 1.x / 3.x |
+
 ## Repository structure
 
 ```
 ├── fix.sh      # Patch script (bash)
+├── LICENSE     # MIT license
+├── .gitignore
 └── README.md   # This file
 ```
 
@@ -101,3 +134,7 @@ bash /tmp/deploy-patch/fix.sh
 If this script saved you time, you can buy me a coffee:
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-☕-yellow?style=flat-square)](https://buycoffee.to/pearpl)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
